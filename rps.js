@@ -1,3 +1,7 @@
+let playerSelection = prompt("Chose Rock, Paper, or Scissors: ");
+
+let playerSelectionLower = playerSelection.toLowerCase();
+
 function getComputerChoice() {
     const randNum = Math.floor(Math.random() * (3 - 1) + 1);
     if (randNum === 1) {
@@ -7,5 +11,4 @@ function getComputerChoice() {
     } else {
         return "Scissors";
     }
-}
-console.log(getComputerChoice())
+};
