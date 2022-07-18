@@ -6,10 +6,14 @@
       for (let i = 0; i < 5; i++) { 
         function gameLogic() {
 
+            // takes player input
+
             let playerSelection = prompt("Chose Rock, Paper, or Scissors: ");
 
             var playerSelectionLower = playerSelection.toLowerCase();
-    
+            
+            // takes computer input
+
             function getComputerChoice() {
                 let randNum = Math.floor(Math.random() * (3 - 1) + 1);
                 if (randNum === 1) {
@@ -22,6 +26,8 @@
             };
     
             var getComputerChoiceVar = getComputerChoice();
+
+            // plays the game
 
             let pSL = playerSelectionLower;
             let gCC = getComputerChoiceVar;
@@ -38,6 +44,9 @@
         };
         console.log(gameLogic());
       };
+    
+    // figures results of the game
+
     if (win > loss) {
         return "You Won! Wins: " + win + " Losses: " + loss + " Ties: " + tie;
     } else if (win === loss) {
