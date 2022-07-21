@@ -1,4 +1,6 @@
-window.onload=function() {
+
+    // takes player input
+
     var playerSelection = "";
     var rock = document.querySelector(".rock");
     var paper = document.querySelector(".paper");
@@ -11,7 +13,6 @@ window.onload=function() {
     scissors.addEventListener("click", scissorsSelection);
     scissors.addEventListener("click", game);
 
-        // takes player input
     function rockSelection() {
         playerSelection = "rock";
     };
@@ -22,15 +23,42 @@ window.onload=function() {
         playerSelection = "scissors";
     };
     
+    // keeps track of results
+
+    let win = 0;
+    let loss = 0;
+    let tie = 0;
+
+    function scoreUI() {
+        let resultsScore = document.querySelector(".resultsScore");
+        document.querySelector(".resultsScore").style.cssText = "font-size: 24px;"
+        let score = "Wins: " + win + " Losses: " + loss + " Ties: " + tie;
+        if ((win || loss) === 5) {
+            if (win > loss) {
+                score = "You Won! Wins: " + win + " Losses: " + loss + " Ties: " + tie;
+            } else {
+                score = "You lost... Wins: " + win + " Losses: " + loss + " Ties: " + tie;
+            };
+            let buttonContainer = document.querySelector(".buttonContainer");
+            while (buttonContainer.firstChild) {
+                buttonContainer.removeChild(buttonContainer.firstChild)
+            };
+            let retry = document.createElement("button");
+            retry.textContent = "Retry?";
+            retry.addEventListener("click", refresh);
+            buttonContainer.append(retry);
+        };
+        resultsScore.textContent = score;
+    };
+
+    // the retry button
+    
+    function refresh() {
+        window.location.reload();
+    };
+
     function game() {
-        let win = 0;
-        let loss = 0;
-        let tie = 0;
-
-
-    //      for (let i = 0; i < 5; i++) { 
             function gameLogic() {
-
 
                 // takes computer input
 
@@ -53,26 +81,17 @@ window.onload=function() {
                 let gCC = getComputerChoiceVar;
                 if ((pSL == "rock" && gCC == "scissors") || (pSL == "paper" && gCC == "rock") || (pSL == "scissors" && gCC == "paper")) {
                     win += 1;
+                    scoreUI();
                     return "You win " + pSL + " beats " + gCC + "!";
                 } else if (pSL === gCC) {
                     tie += 1;
+                    scoreUI();
                     return "You tied. Both chose " + pSL;
                 } else {
                     loss += 1;
+                    scoreUI();
                     return "You lose! " + gCC + " beats " + pSL + ".";
                 }
             };
             console.log(gameLogic());
-    //      };
-        
-        // figures results of the game
-    /*
-        if (win > loss) {
-            return "You Won! Wins: " + win + " Losses: " + loss + " Ties: " + tie;
-        } else if (win === loss) {
-            return "You tied. Wins: " + win + " Losses: " + loss + " Ties: " + tie;
-        } else {
-            return "You lost. Wins: " + win + " Losses: " + loss + " Ties: " + tie;
-        } */
     };
-};
